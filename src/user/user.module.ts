@@ -4,7 +4,6 @@ import { UserService } from './user.service';
 import { DbModule } from '../db/db.module';
 
 @Module({
-  //test
   controllers: [UserController],
   providers: [UserService],
   imports: [DbModule],
