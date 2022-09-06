@@ -1,12 +1,23 @@
-import { Column, Model, Table, DataType } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  Table,
+  DataType,
+  BelongsToMany,
+} from 'sequelize-typescript';
+import { UserGroup } from './user-group';
+import { Group } from './group';
 
 @Table
 export class User extends Model {
+  @BelongsToMany(() => Group, () => UserGroup, 'userId')
+  groups: Group[];
+
   @Column
   login: string;
 
   @Column({ primaryKey: true, type: DataType.UUID })
-  user_id: string;
+  userId: string;
 
   @Column
   password: string;

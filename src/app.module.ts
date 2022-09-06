@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { DbModule } from './db/db.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './shared/models/user';
+import { GroupModule } from './group/group.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { User } from './shared/models/user';
       autoLoadModels: true,
       synchronize: true,
     }),
+    GroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],

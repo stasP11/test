@@ -6,32 +6,32 @@ import {
   Post,
   Delete,
   Patch,
+  Param,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from '../shared/types/types';
 import { UserDto } from '../shared/validation/validation';
 
-@Controller()
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  @Post('register')
+  @Post(':id')
   async createUser(@Body() UserDto: UserDto) {
     await this.userService.createUser(UserDto);
   }
 
-  @Patch('update')
-  async updateUser(@Body() user: UserDto) {
-    await this.userService.updateUser(user.id, user);
+  @Patch(':id')
+  async updateUser(@Param() params: any, @Body() user: UserDto) {
+    await this.userService.updateUser(params.id, user);
   }
 
-  @Delete('remove')
-  async removeUser(@Body() user: User) {
-    await this.userService.removeUser(user.id);
+  @Delete(':id')
+  async removeUser(@Param() params: any) {
+    await this.userService.removeUser(params.id);
   }
 
-  @Get('get')
-  async getUser(@Body() user: User) {
-    const foundedUser = await this.userService.getUser(user.id);
+  @Get(':id')
+  async getUser(@Param() params: any) {
+    const foundedUser = await this.userService.getUser(params.id);
     return foundedUser;
   }
 
